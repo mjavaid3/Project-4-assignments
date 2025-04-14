@@ -1,87 +1,60 @@
-# rock paper scissors
+# Ultimate Battle Arena: Rock vs Paper vs Scissors
 import random
- 
-# Print multiline instruction
-# performstring concatenation of string
-print("Winning Rules of the Rock paper scissor game as follows: \n"
-                                +"Rock vs paper->paper wins \n"
-                                + "Rock vs scissor->Rock wins \n"
-                                +"paper vs scissor->scissor wins \n")
- 
+
+# Display game rules with better formatting
+print(" Rules of the Game \n"
+      "• Rock crushes Scissors\n"
+      "• Paper covers Rock\n"
+      "• Scissors cut Paper\n")
+
 while True:
-    print("Enter choice \n 1 for Rock, \n 2 for paper, and \n 3 for scissor \n")
-     
-    # take the input from user
-    choice = int(input("User turn: "))
- 
-    # OR is the short-circuit operator
-    # if any one of the condition is true
-    # then it return True value
-     
-    # looping until user enter invalid input
-    while choice > 3 or choice < 1:
-        choice = int(input("enter valid input: "))
-         
- 
-    # initialize value of choice_name variable
-    # corresponding to the choice value
-    if choice == 1:
-        choice_name = 'Rock'
-    elif choice == 2:
-        choice_name = 'paper'
-    else:
-        choice_name = 'scissor'
-         
-    # print user choice
-    print("user choice is: " + choice_name)
-    print("\nNow its computer turn.......")
- 
-    # Computer chooses randomly any number
-    # among 1 , 2 and 3. Using randint method
-    # of random module
-    comp_choice = random.randint(1, 3)
-     
-    # looping until comp_choice value
-    # is equal to the choice value
-    while comp_choice == choice:
-        comp_choice = random.randint(1, 3)
- 
-    # initialize value of comp_choice_name
-    # variable corresponding to the choice value
-    if comp_choice == 1:
-        comp_choice_name = 'Rock'
-    elif comp_choice == 2:
-        comp_choice_name = 'paper'
-    else:
-        comp_choice_name = 'scissor'
-         
-    print("Computer choice is: " + comp_choice_name)
- 
-    print(choice_name + " V/s " + comp_choice_name)
+    print("\nChoose your weapon:\n"
+          "1 - Rock\n"
+          "2 - Paper\n"
+          "3 - Scissors\n")
     
-    # condition for draw
-    if choice == comp_choice:
-        print("<== Its a tie ==>")
-    # condition for winning
-    elif ((choice == 1 and comp_choice == 2) or
-          (choice == 2 and comp_choice == 1)):
-        print("paper wins => ", end = "")
-        print("<== Computer wins ==>") if comp_choice == 2 else print("<== User wins ==>")
-    elif ((choice == 1 and comp_choice == 3) or
-          (choice == 3 and comp_choice == 1)):
-        print("Rock wins =>", end = "")
-        print("<== Computer wins ==>") if comp_choice == 1 else print("<== User wins ==>")
+    # Get player's selection
+    player_selection = int(input("Your move warrior: "))
+    
+    # Validate input
+    while player_selection > 3 or player_selection < 1:
+        player_selection = int(input("Invalid weapon! Choose 1-3: "))
+    
+    # Map selection to weapon name
+    weapon_names = {1: 'Rock', 2: 'Paper', 3: '✂Scissors'}
+    player_weapon = weapon_names[player_selection]
+    
+    print(f"\nYou chose: {player_weapon}")
+    print("The computer is selecting its weapon...")
+    
+    # Computer's selection (ensuring different choice for more excitement)
+    computer_selection = random.randint(1, 3)
+    while computer_selection == player_selection:
+        computer_selection = random.randint(1, 3)
+    
+    computer_weapon = weapon_names[computer_selection]
+    print(f"Computer chose: {computer_weapon}")
+    
+    print(f"\n{player_weapon}  VS  {computer_weapon}")
+    
+    # Determine battle outcome
+    if player_selection == computer_selection:
+        print("The battle ends in a stalemate!")
+    elif ((player_selection == 1 and computer_selection == 3) or
+          (player_selection == 3 and computer_selection == 1)):
+        print("Rock smashes Scissors! ", end="")
+        print("You conquer!") if player_selection == 1 else print("The machine triumphs!")
+    elif ((player_selection == 1 and computer_selection == 2) or
+          (player_selection == 2 and computer_selection == 1)):
+        print("Paper envelops Rock! ", end="")
+        print("You dominate!") if player_selection == 2 else print("The AI prevails!")
     else:
-        print("scissor wins =>", end = "")
-        print("<== Computer wins ==>") if comp_choice == 3 else print("<== User wins ==>")
-         
-    print("Do you want to play again? (Y/N)")
-    ans = input().lower()
- 
-    # if user input n or N then condition is True
-    if ans == 'n':
+        print("Scissors slice Paper! ", end="")
+        print("You emerge victorious!") if player_selection == 3 else print("The computer wins!")
+    
+    # Play again prompt
+    rematch = input("\nDo you dare to battle again? (Y/N): ").lower()
+    if rematch == 'n':
         break
-     
-# after coming out of the while loop
-# we print thanks for playing
-print("\nThanks for playing")
+
+print("\nThank you for battling in the Arena! Until next time! ")
