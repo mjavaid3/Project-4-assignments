@@ -1,18 +1,24 @@
-# program to let the computer guess the number user is thinking
+# program to let the AI guess the secret number in your mind
 import random 
-def userguess(x):
-    low = 1
-    high = x
-    userfeedback = ""
-    while userfeedback != "c":
-        if low != high :
-            guess = random.randint(low, high)
+
+def mind_reader(max_num):
+    minimum_range = 1
+    maximum_range = max_num
+    player_response = ""
+    
+    while player_response != "c":
+        if minimum_range != maximum_range:
+            ai_prediction = random.randint(minimum_range, maximum_range)
         else:
-            guess= low
-        userfeedback = input(f"Is {guess} too high (h), too low(l) or correct(c)")
-        if userfeedback=="h":
-            high = guess-1 
-        elif userfeedback=="l":
-            low = guess+1
-    print(f"Yeah! The computer has guessed the right number {guess}.")
-userguess(20)
+            ai_prediction = minimum_range
+            
+        player_response = input(f"Is {ai_prediction} too big (h), too small (l) or correct (c)? ")
+        
+        if player_response == "h":
+            maximum_range = ai_prediction - 1 
+        elif player_response == "l":
+            minimum_range = ai_prediction + 1
+            
+    print(f"Amazing! The AI has read your mind and found the correct number: {ai_prediction}.")
+
+mind_reader(20)
